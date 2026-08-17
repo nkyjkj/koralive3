@@ -1,1 +1,99 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="نتائج مباريات كرة القدم اليوم، النتائج المباشرة وترتيب البطولات من مصدر بيانات رياضي موثوق." />
+  <title>كورة لايف | نتائج مباريات كرة القدم</title>
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Tajawal:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="/">
+        <span class="brand-ball">⚽</span>
+        <span data-i18n="brand">كورة لايف</span>
+      </a>
+      <div class="nav-actions">
+        <button id="langBtn" class="pill-btn" type="button">
+          <span data-i18n="lang_toggle">English</span>
+        </button>
+        <button id="themeBtn" class="icon-btn" type="button" data-i18n-aria="theme_toggle" aria-label="تبديل المظهر">
+          <svg class="icon-moon" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="pitch-line" aria-hidden="true"></div>
+  </header>
 
+  <main class="container">
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow" data-i18n="eyebrow_hero">لوحة النتائج المباشرة</span>
+        <h1 data-i18n="hero_title">نتائج مباريات كرة القدم، لحظة بلحظة.</h1>
+        <p data-i18n="hero_desc">تابع مباريات اليوم والنتائج المباشرة من مصدر بيانات رياضي موثوق.</p>
+      </div>
+      <div class="hero-stat">
+        <strong id="matchCount">—</strong>
+        <span data-i18n="hero_stat_label">مباراة اليوم</span>
+        <div id="liveBadge" class="live-badge" hidden>
+          <span class="dot"></span>
+          <span id="liveCount">0</span>
+          <span data-i18n="live_now">مباراة مباشرة الآن</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="toolbar">
+      <div class="date-bar">
+        <button id="prevDay" class="round-btn" aria-label="prev">‹</button>
+        <div class="date-display">
+          <small data-i18n="date_label">التاريخ</small>
+          <strong id="selectedDate">—</strong>
+        </div>
+        <button id="nextDay" class="round-btn" aria-label="next">›</button>
+        <button id="todayBtn" class="today-btn" data-i18n="today">اليوم</button>
+      </div>
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-3.8-3.8"/></svg>
+        <input id="searchInput" type="search" data-i18n-placeholder="search_placeholder" placeholder="ابحث عن فريق...">
+      </div>
+    </section>
+
+    <section id="matches" class="matches-section">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow" data-i18n="section_eyebrow">مركز المباريات</span>
+          <h2 data-i18n="section_title">مباريات اليوم</h2>
+        </div>
+        <div class="filters" role="tablist">
+          <button class="filter active" data-filter="all" data-i18n="filter_all">الكل</button>
+          <button class="filter" data-filter="live" data-i18n="filter_live">مباشر</button>
+          <button class="filter" data-filter="scheduled" data-i18n="filter_scheduled">لم تبدأ</button>
+          <button class="filter" data-filter="finished" data-i18n="filter_finished">انتهت</button>
+        </div>
+      </div>
+
+      <div id="state" class="state" data-i18n="state_loading">جاري تحميل المباريات...</div>
+      <div id="matchesGrid" class="matches-grid"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="pitch-line" aria-hidden="true"></div>
+    <div class="container footer-inner">
+      <div>
+        <strong data-i18n="brand">كورة لايف</strong>
+        <span data-i18n="footer_tag">منصة نتائج مباريات كرة القدم مباشرة</span>
+      </div>
+      <span class="footer-source">Powered by API-Football</span>
+    </div>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>
