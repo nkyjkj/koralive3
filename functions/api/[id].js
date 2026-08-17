@@ -1,9 +1,9 @@
-import { normalizeFixture, callFootballApi, jsonError } from "../_lib/football.js";
+import { callFootballApi, jsonError } from "../../_lib/football.js";
 
 export async function onRequestGet(context) {
-  const { request, env } = context;
+  const { request, env, params } = context;
   const timezone = env.TIMEZONE || "Africa/Cairo";
-  const ttl = Number(env.LIVE_CACHE_S || 60); // 1 min default, live data changes fast
+  const id = params.id;
 
   const cache = caches.default;
   const cacheKey = new Request(request.url, request);
@@ -11,17 +11,17 @@ export async function onRequestGet(context) {
   if (cached) return cached;
 
   try {
-    const data = await callFootballApi("fixtures", { live: "all", timezone }, env);
+    const data = await callFootballApi("fixtures", { id, timezone }, env);
     const payload = {
       success: true,
       cached: false,
-      results: (data.response || []).map(normalizeFixture)
+      result: (data.response && data.response[0]) || null
     };
 
     const response = new Response(JSON.stringify(payload), {
       headers: {
         "content-type": "application/json; charset=utf-8",
-        "Cache-Control": `public, max-age=${ttl}`
+        "Cache-Control": "public, max-age=600"
       }
     });
 
